@@ -1,0 +1,8 @@
+.navbar {
+    border: 1px solid gray;
+    background-color: rgb(106, 13, 102);
+}
+
+.navbar h1 {
+    color: rgb(9, 71, 228);
+}
