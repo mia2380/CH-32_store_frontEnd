@@ -6,6 +6,15 @@ import {Link} from "react-router-dom";
 function NavBar() {
   const cart = useContext(DataContext).cart;
 
+  const countProducts = () => {
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
+    const prod = cart[i];
+    total += prod.quantity;
+    }
+    
+    return total;
+  };
 
 
   return (
@@ -40,7 +49,7 @@ function NavBar() {
           <form className="d-flex" role="search">
             
           <Link className="btn btn-outline-success" to="/cart">
-              <span className="badge text-bg-light"> {cart.length}</span> &nbsp;<i class="bi bi-cart4"></i> &nbsp;View Cart
+              <span className="badge text-bg-light"> {countProducts()}</span> &nbsp;<i class="bi bi-cart4"></i> &nbsp;View Cart
             </Link>
 
             

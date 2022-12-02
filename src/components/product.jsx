@@ -10,8 +10,8 @@ const Product = (props) => {
 
   const handleAdd = () => {
     // call the context function
-    addProd();
-  
+    let prodForCart = {...props.data, quantity: quantity};
+    addProd(prodForCart);
   };
 
   const [quantity, setQuantity] = useState(1);
