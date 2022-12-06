@@ -2,7 +2,7 @@ import "./cartProduct.css";
 
 
 
-const cartProduct =(props) => {
+const CartProduct =(props) => {
 
     const getTotal = () => {
         let total  = props.data.price * props.data.quantity;
@@ -26,4 +26,4 @@ const cartProduct =(props) => {
     )
 }
 
-export default cartProduct;
+export default CartProduct;
