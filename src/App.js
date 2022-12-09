@@ -5,7 +5,7 @@ import Catalog from "./pages/catalog";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Admin from "./pages/admin";
-import GlobalState from "./state/golbalState";
+import GlobalState from "./state/globalState";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

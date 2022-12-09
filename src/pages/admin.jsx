@@ -1,6 +1,6 @@
 import "./admin.css";
-import { useState } from "react";
-import Product from '../components/product';
+import { useState, useEffect } from "react";
+import DataService from "../services/dataService";
 
 const Admin = () => {
   const [product, setProduct] = useState({});
@@ -9,9 +9,18 @@ const Admin = () => {
   const [couponCode, setCouponCode] = useState([]);
   const [allCoupons, setAllCoupons] = useState([]);
 
-  const saveProduct = () => {
+  const saveProduct = async () => {
     console.log(product);
-    
+
+    // send the product to the server
+    // call the saveProduct function on the DataService
+    let fixedProd = { ...product };
+    fixedProd.price = parseFloat(fixedProd.price);
+
+    let service = new DataService();
+    let res = await service.saveProduct(product);
+    console.log(res);
+
     let copy = [...allProducts];
     copy.push(product);
     setAllProducts(copy);
@@ -45,6 +54,35 @@ const Admin = () => {
     copy[name] = value;
     setCouponCode(copy);
   };
+
+  /**
+   * create the fn,
+   * create an instance of DataService
+   * call the getCatalog method to retrieve the list of products
+   * set the list of products to the allProducts state variable
+   */
+  const loadProductsFromServer = async () => {
+    // * create an instance of DataService
+    let service = new DataService();
+    // * call the getCatalog method to retrieve the list of products
+    let prods = await service.getCatalog();
+    // * set the list of products to the allProducts state variable
+    setAllProducts(prods);
+  };
+
+  const loadCouponsFromServer = async () => {
+    // * create an instance of DataService
+    let service = new DataService();
+    // * call the getCatalog method to retrieve the list of coupons
+    let coupons = await service.getCoupons();
+    // * set the list of coupons to the allProducts state variable
+    setAllCoupons(coupons);
+  };
+  // when the component is loaded/displayed
+  useEffect(() => {
+    loadProductsFromServer();
+    loadCouponsFromServer();
+  }, []);
 
   return (
     <div className="admin">
@@ -91,8 +129,6 @@ const Admin = () => {
               </li>
             ))}
           </ul>
-
-
         </div>
 
         <div className="coupons-form">
@@ -132,5 +168,3 @@ const Admin = () => {
 };
 
 export default Admin;
-
-// testing a change for uploaded files
